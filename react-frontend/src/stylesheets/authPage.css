@@ -8,7 +8,7 @@ header>h1 {
   font: bold 30px Arial;
 }
 
-header>button {
+header>a {
   float: right;
   height: 80px;
   width: 150px;

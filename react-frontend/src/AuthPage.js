@@ -3,10 +3,10 @@
  */
 
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import React, {useEffect} from "react";
 
-import {logout, getUsername, get_jwt_token} from "./authToken";
+import {getUsername, get_jwt_token} from "./authToken";
 
 import "./stylesheets/authPage.css"
 
@@ -27,18 +27,14 @@ export default function AuthPage(props) {
                     <div>
                         <header>
                             <h1>{`Hello ${getUsername()}`}</h1>
-                            <button onClick={() => {
-                                logout()
-                                navigate("/login")
-                            }}>Logout</button>
+                            <Link to="/logout">Logout</Link>
                         </header>
                         {props.page}
                     </div>
                 )
             })
             .catch(() => {
-                logout()
-                navigate("/login")
+                navigate("/logout")
             })
     }, [])
 
