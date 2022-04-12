@@ -1,0 +1,18 @@
+header {
+  display: block;
+  height: 100px;
+}
+
+header>h1 {
+  float: left;
+  font: bold 30px Arial;
+}
+
+header>button {
+  float: right;
+  height: 80px;
+  width: 150px;
+  margin-right: 20px;
+  font-size: 20px;
+  border-radius: 20px;
+}

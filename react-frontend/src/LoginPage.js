@@ -5,7 +5,7 @@
 import React from 'react'
 import {useNavigate, Navigate} from "react-router-dom";
 
-import {jwt_token, createToken} from "./authToken"
+import {get_jwt_token, createToken} from "./authToken"
 import './stylesheets/loginPage.css'
 
 export default function LoginPage(props) {
@@ -39,7 +39,7 @@ export default function LoginPage(props) {
         })
     }
 
-    if (jwt_token != null) {
+    if (get_jwt_token() !== "") {
         return <Navigate to="/dashboard"/>
     }
 

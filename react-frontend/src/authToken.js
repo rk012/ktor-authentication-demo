@@ -3,8 +3,17 @@
  */
 
 import axios from "axios";
+import {Buffer} from "buffer";
 
-export let jwt_token = null
+let jwt_token = ""
+
+export function getUsername() {
+    if (jwt_token == null) {
+        return null;
+    }
+
+    return JSON.parse(Buffer.from(jwt_token.split('.')[1], 'base64').toString()).user
+}
 
 export async function createToken(username, password, register) {
     let success = false
@@ -37,6 +46,13 @@ export async function createToken(username, password, register) {
             })
     }
 
-    console.log(success)
     return success
+}
+
+export function get_jwt_token() {
+    return jwt_token
+}
+
+export function logout() {
+    jwt_token = ""
 }

@@ -1,7 +1,11 @@
-package com.example
+package com.example.routing
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.example.User
+import com.example.jwtAudience
+import com.example.jwtIssuer
+import com.example.jwtSecret
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -23,7 +27,7 @@ fun hash(pass: String) = MessageDigest
     .digest(pass.toByteArray())
     .joinToString("") { "%02x".format(it) }
 
-fun Application.userRouting() {
+fun Application.userLoginRouting() {
     routing {
         post("/login") {
             val user = call.request.queryParameters["user"] ?: return@post call.respond(HttpStatusCode.BadRequest)

@@ -5,6 +5,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import NotFound from './NotFound'
 import Home from './Home';
 import LoginPage from './LoginPage'
+import AuthPage from './AuthPage'
+import Dashboard from './Dashboard'
 
 ReactDOM.render(
     <React.StrictMode>
@@ -13,6 +15,7 @@ ReactDOM.render(
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<LoginPage registration />} />
+                <Route path="/dashboard" element={<AuthPage page={<Dashboard />} />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
