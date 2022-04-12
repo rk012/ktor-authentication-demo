@@ -1,0 +1,26 @@
+h1 {
+    text-align: center;
+}
+
+#loginButtons {
+    text-align: center;
+}
+
+.NavButton {
+    display: inline-block;
+
+    font: bold 30px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+
+    padding: 2px 6px;
+
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    border-radius: 4px;
+
+    margin: 10px 20px;
+}
