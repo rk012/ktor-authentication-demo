@@ -15,7 +15,7 @@ import io.ktor.server.plugins.compression.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-const val jwtAudience = "http://0.0.0.0:8080/u/*"
+const val jwtAudience = "http://0.0.0.0:8080/api/user"
 const val jwtIssuer = "http://0.0.0.0:8080"
 
 // Randomly generate JWT secret key everytime server starts
