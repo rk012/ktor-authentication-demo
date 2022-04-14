@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.litote.kmongo:kmongo:4.5.1")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-auth-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-auth-jwt-jvm:$ktor_version")

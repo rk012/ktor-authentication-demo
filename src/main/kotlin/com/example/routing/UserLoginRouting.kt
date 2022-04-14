@@ -12,8 +12,10 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.security.MessageDigest
 import java.util.*
+import org.litote.kmongo.*
 
-val users = mutableListOf<User>()
+val db = KMongo.createClient().getDatabase("ktor_auth_demo")
+val users = db.getCollection<User>()
 
 fun generateToken(user: String): String = JWT.create()
     .withAudience(jwtAudience)
@@ -33,10 +35,15 @@ fun Application.userLoginRouting() {
             val user = call.request.queryParameters["user"] ?: return@post call.respond(HttpStatusCode.BadRequest)
             val password = call.request.queryParameters["pass"] ?: return@post call.respond(HttpStatusCode.BadRequest)
 
-            if (users.none {
-                    it.username == user &&
-                    it.passHash == hash(password)
-            }) return@post call.respond(HttpStatusCode.Unauthorized)
+            if (
+                users
+                    .find(and(
+                        User::username eq user,
+                        User::passHash eq hash(password)
+                    ))
+                    .first()
+                == null
+            ) return@post call.respond(HttpStatusCode.Unauthorized)
 
             call.respond(generateToken(user))
         }
@@ -45,9 +52,16 @@ fun Application.userLoginRouting() {
             val user = call.request.queryParameters["user"] ?: return@post call.respond(HttpStatusCode.BadRequest)
             val password = call.request.queryParameters["pass"] ?: return@post call.respond(HttpStatusCode.BadRequest)
 
-            if (users.any { it.username == user }) return@post call.respond(HttpStatusCode.Forbidden)
+            if (
+                users
+                    .find(
+                        User::username eq user
+                    )
+                    .first()
+                != null
+            ) return@post call.respond(HttpStatusCode.Forbidden)
 
-            users.add(
+            users.insertOne(
                 User(
                     user,
                     hash(password)
